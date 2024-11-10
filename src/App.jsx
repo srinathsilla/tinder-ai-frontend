@@ -63,6 +63,47 @@ const MatchesList = () => (
   </div>
 );
 
+const ChatScreen = () =>{
+
+  const [input, setInput] = useState('');
+
+  const handleSend = () => {
+    if(input.trim()){
+      console.log(input);
+      setInput("");
+    }
+    setInput("");
+  }
+
+  return (
+    <div className="rounded-lg shadow-lg p-4">
+      <h2 className="text-2xl font-bold mb-4">Chat with Foo Bar</h2>
+      <div className="h-[50vh] border rounded overflow-y-auto mb-4 p-2">
+        {[
+          "Hi",
+          "How are you?",
+          "I am fine, thank you",
+          "What are you doing?",
+          "I am working on a new project",
+          "That's cool",
+          "Yes, it is",
+        ].map((message, index) => (
+          <div key={index} className="mb-2">
+            <p className="p-2 bg-gray-100 rounded-lg inline-block">
+              {message}
+            </p>
+          </div>
+        ))
+        }
+      </div>
+      <div className="flex">
+        <input type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type a message..." className="flex-1 p-2 mr-2 border rounded-l" />
+        <button className="bg-blue-500 text-white p-2 rounded-r" onClick={handleSend}>Send</button>
+        </div>
+    </div>
+  )
+}
+
 function App() {
 
   const [currentScreen, setCurrentScreen] = useState('profile');
@@ -73,6 +114,8 @@ function App() {
         return <ProfileSelector />;
       case 'matches':
         return <MatchesList />;
+      case 'chat':
+        return <ChatScreen />;
     }
   }
 
